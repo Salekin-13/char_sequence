@@ -76,10 +76,13 @@ class BanglaChar():
             "targets": torch.tensor(label,dtype = torch.long)
         }
         
-def dividing_datasets():
-    train = BanglaChar(datatype='train')
-    test = BanglaChar(datatype='test')
-    val = BanglaChar(datatype='val')
+def dividing_datasets(with_start_end_token = None):
+    
+    with_start_end_token = with_start_end_token if with_start_end_token is not None else False
+    
+    train = BanglaChar(datatype='train',with_start_end_token=with_start_end_token)
+    test = BanglaChar(datatype='test',with_start_end_token=with_start_end_token)
+    val = BanglaChar(datatype='val',with_start_end_token=with_start_end_token)
 
     train_loader = DataLoader(train, batch_size=BATCH_SIZE, shuffle=False)
     test_loader = DataLoader(test, batch_size=BATCH_SIZE, shuffle=True)
